@@ -1,0 +1,14 @@
+apiVersion: demo.operator.anishbista.xyz/v1alpha1
+kind: Scaler
+metadata:
+  labels:
+    app.kubernetes.io/name: k8s-operator
+    app.kubernetes.io/managed-by: kustomize
+  name: scaler-sample
+spec:
+  start: 1
+  end: 10
+  replicas: 10
+  deployments: 
+    - name: nginx  
+      namespace: default 
