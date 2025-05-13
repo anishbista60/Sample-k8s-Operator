@@ -1,0 +1,4 @@
+## Append samples of your project ##
+resources:
+- mutations_v1alpha1_assign.yaml
+# +kubebuilder:scaffold:manifestskustomizesamples

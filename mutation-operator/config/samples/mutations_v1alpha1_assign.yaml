@@ -1,0 +1,58 @@
+apiVersion: mutations.kratos.dev/v1alpha1
+kind: Assign
+metadata:
+  name: example-nodeselector
+spec:
+  applyTo:
+  - groups:
+    - ""
+    kinds:
+    - Pod
+    versions:
+    - v1
+  location: spec.nodeSelector
+  match:
+    kinds:
+    - apiGroups:
+      - '*'
+      kinds:
+      - Pod
+    namespaceSelector:
+      matchLabels:
+        kubernetes.io/metadata.name: k8scostai
+    scope: Namespaced
+  parameters:
+    assign:
+      value:
+        k8scostai.com/spot: "true"
+---
+apiVersion: mutations.kratos.dev/v1alpha1
+kind: Assign
+metadata:
+  name: example-tolerations
+spec:
+  applyTo:
+  - groups:
+    - ""
+    kinds:
+    - Pod
+    versions:
+    - v1
+  location: spec.tolerations
+  match:
+    kinds:
+    - apiGroups:
+      - ""
+      kinds:
+      - Pod
+    namespaceSelector:
+      matchLabels:
+        kubernetes.io/metadata.name: k8scostai
+    scope: Namespaced
+  parameters:
+    assign:
+      value:
+      - key: "k8scostai.com/scalesetpriority"
+        operator: "Equal"
+        value: "spot"
+        effect: "NoSchedule"

@@ -1,0 +1,152 @@
+---
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  annotations:
+    controller-gen.kubebuilder.io/version: v0.16.4
+  name: assigns.mutations.kratos.dev
+spec:
+  group: mutations.kratos.dev
+  names:
+    kind: Assign
+    listKind: AssignList
+    plural: assigns
+    singular: assign
+  scope: Namespaced
+  versions:
+  - name: v1alpha1
+    schema:
+      openAPIV3Schema:
+        description: Assign is the Schema for the assigns API.
+        properties:
+          apiVersion:
+            description: |-
+              APIVersion defines the versioned schema of this representation of an object.
+              Servers should convert recognized schemas to the latest internal value, and
+              may reject unrecognized values.
+              More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+            type: string
+          kind:
+            description: |-
+              Kind is a string value representing the REST resource this object represents.
+              Servers may infer this from the endpoint the client submits requests to.
+              Cannot be updated.
+              In CamelCase.
+              More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+            type: string
+          metadata:
+            type: object
+          spec:
+            description: |-
+              AssignSpec defines the desired state of Assign.
+              It specifies where and how the mutation rules should be applied.
+            properties:
+              applyTo:
+                description: ApplyTo specifies the target resources (Groups, Kinds,
+                  Versions) for mutation.
+                items:
+                  description: ApplyTo specifies the resource types targeted by the
+                    mutation rule.
+                  properties:
+                    groups:
+                      description: Groups represent Kubernetes API groups the rule
+                        applies to.
+                      items:
+                        type: string
+                      type: array
+                    kinds:
+                      description: Kind represents the kinds of Kubernetes resources
+                        the rule targets.
+                      items:
+                        type: string
+                      type: array
+                    versions:
+                      description: Versions represent API versions of the targeted
+                        resources.
+                      items:
+                        type: string
+                      type: array
+                  required:
+                  - groups
+                  - kinds
+                  - versions
+                  type: object
+                type: array
+              location:
+                description: Location indicates the specific path or field in the
+                  resource to mutate.
+                type: string
+              match:
+                description: Match defines criteria to match specific Kubernetes resources.
+                properties:
+                  kinds:
+                    description: Kinds specifies resource kinds to match.
+                    items:
+                      description: KindSelector specifies Kubernetes resource kinds
+                        and their API groups.
+                      properties:
+                        apiGroups:
+                          description: ApiGroups are API groups of the targeted resource.
+                          items:
+                            type: string
+                          type: array
+                        kinds:
+                          description: Kinds represent the specific kinds of resources.
+                          items:
+                            type: string
+                          type: array
+                      required:
+                      - apiGroups
+                      - kinds
+                      type: object
+                    type: array
+                  namespaceSelector:
+                    description: NameSpaceSelector selects namespaces based on labels.
+                    properties:
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels selects namespaces with specific
+                          labels.
+                        type: object
+                    required:
+                    - matchLabels
+                    type: object
+                  scope:
+                    description: Scope defines whether the rule applies to cluster-wide
+                      or namespaced resources.
+                    type: string
+                required:
+                - kinds
+                - namespaceSelector
+                - scope
+                type: object
+              parameters:
+                description: Parameters holds the value assignment logic for mutation.
+                properties:
+                  assign:
+                    description: Assign contains the assignment details for the mutation.
+                    properties:
+                      value:
+                        description: Value holds the dynamic value for mutation.
+                        x-kubernetes-preserve-unknown-fields: true
+                    required:
+                    - value
+                    type: object
+                required:
+                - assign
+                type: object
+            required:
+            - applyTo
+            - location
+            - match
+            - parameters
+            type: object
+          status:
+            description: AssignStatus defines the observed state of Assign.
+            type: object
+        type: object
+    served: true
+    storage: true
+    subresources:
+      status: {}
