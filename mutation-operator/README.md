@@ -1,5 +1,5 @@
 
-# 🧬 Kratos Assign Operator
+# 🧬  Assign Operator
 
 The **Kratos Assign Operator** is a Kubernetes controller that automatically mutates Deployments by applying rules defined in custom `Assign` resources. It supports patching fields like `nodeSelector` and `tolerations` at the Deployment level by analyzing the current state of Pods and tracing them back to their owning ReplicaSets and Deployments.
 
@@ -13,7 +13,7 @@ The **Kratos Assign Operator** is a Kubernetes controller that automatically mut
 * ✅ Fully RBAC-secured and extendable design
 
 
-## 📦 Custom Resource Definition
+## Custom Resource Definition
 
 The operator introduces a new custom resource: `Assign`.
 
@@ -50,9 +50,9 @@ spec:
 ```
 
 
-## 📂 Example Resources
+##  Example Resources
 
-### 🧲 Apply Node Selector
+### Apply Node Selector
 
 ```yaml
 apiVersion: mutations.kratos.dev/v1alpha1
@@ -79,7 +79,7 @@ spec:
         k8scostai.com/spot: "true"
 ```
 
-### 🧱 Apply Tolerations
+### Apply Tolerations
 
 ```yaml
 apiVersion: mutations.kratos.dev/v1alpha1
@@ -111,7 +111,7 @@ spec:
 
 
 
-## ⚙️ How It Works
+## How It Works
 
 1. The controller watches `Assign` custom resources.
 2. For each `Assign`, it selects Pods based on `match.namespaceSelector` and `match.kinds`.
@@ -123,7 +123,7 @@ spec:
 5. Uses exponential backoff retry logic to handle conflicts during updates.
 
 
-## 🔐 RBAC Permissions
+## RBAC Permissions
 
 The operator requires access to the following resources:
 
@@ -140,7 +140,7 @@ The operator requires access to the following resources:
 ```
 
 
-## 🚀 Getting Started
+## Getting Started
 
 1. **Install the CRDs**:
 
