@@ -1,3 +1,12 @@
-## Hello Everyone , Welcome to my repo . This repo contain the sample kubernetes operator. I uses following tool to create these operator: 
-- Operator-sdk
-- Kubebuilder 
+
+
+# Welcome to my repository!
+
+
+These project showcases a sample **Kubernetes Operator** to demonstrate building custom controllers for Kubernetes-native applications.
+
+## Tools Used
+
+* **Kubebuilder** – Tool for creating Kubernetes APIs using CRDs.
+
+
