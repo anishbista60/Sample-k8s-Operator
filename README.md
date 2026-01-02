@@ -7,6 +7,6 @@ These project showcases a sample **Kubernetes Operator** to demonstrate building
 
 ## Tools Used
 
-* **Kubebuilder** – Tool for creating Kubernetes APIs using CRDs.
+* **Kubebuilder** – Tool for creating Kubernetes APIs using CRDs
 
 
